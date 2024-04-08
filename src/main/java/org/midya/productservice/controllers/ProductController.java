@@ -1,9 +1,12 @@
 package org.midya.productservice.controllers;
 
+import org.midya.productservice.dtos.ExceptionDTO;
 import org.midya.productservice.dtos.ProductFetchDTO;
 import org.midya.productservice.models.Category;
 import org.midya.productservice.models.Product;
 import org.midya.productservice.service.ProductService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;

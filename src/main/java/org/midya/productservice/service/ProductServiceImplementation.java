@@ -1,6 +1,7 @@
 package org.midya.productservice.service;
 
 import org.midya.productservice.dtos.ProductFetchDTO;
+import org.midya.productservice.exceptions.ProductNotFoundException;
 import org.midya.productservice.models.Category;
 import org.midya.productservice.models.Product;
 import org.springframework.stereotype.Service;
@@ -50,7 +51,9 @@ public class ProductServiceImplementation implements ProductService {
                 url + "/" + id,
                 ProductFetchDTO.class
         );
-        assert productFetchDTO != null;
+        if(productFetchDTO == null) {
+            throw new ProductNotFoundException("Product with id " + id + " not found!");
+        }
         return convertToProduct(productFetchDTO);
     }
 
