@@ -14,7 +14,7 @@ public interface ProductService {
     public List<Category> getAllCategories();
     public List<Product> getProductsByCategoryName(String categoryName);
     public String deleteProduct(Long id);
-    public ProductFetchDTO addProduct(Product product);
-    public ProductFetchDTO updateProduct(Product product);
+    public Product addProduct(Product product);
+    public void updateProduct(Product product);
 
 }

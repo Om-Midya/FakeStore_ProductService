@@ -1,6 +1,7 @@
 package org.midya.productservice.exceptionhandler;
 
 import org.midya.productservice.dtos.ExceptionDTO;
+import org.midya.productservice.exceptions.CategoryNotFoundException;
 import org.midya.productservice.exceptions.ProductNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,21 +11,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(ArithmeticException.class)
-    public ResponseEntity<ExceptionDTO> handleArithmeticException() {
+    @ExceptionHandler(CategoryNotFoundException.class)
+    public ResponseEntity<ExceptionDTO> handleCategoryNotFoundException(CategoryNotFoundException e) {
         ExceptionDTO exceptionDTO = new ExceptionDTO();
-        exceptionDTO.setMessage("Arithmetic Exception");
-        exceptionDTO.setResolution("Please check the arithmetic operation");
+        exceptionDTO.setMessage(e.getMessage());
+        exceptionDTO.setResolution("Please check the category name");
         return new ResponseEntity<>(exceptionDTO, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(ArrayIndexOutOfBoundsException.class)
-    public ResponseEntity<ExceptionDTO> handleArrayIndexOutOfBoundsException() {
-        ExceptionDTO exceptionDTO = new ExceptionDTO();
-        exceptionDTO.setMessage("Array Index Out Of Bounds Exception");
-        exceptionDTO.setResolution("Please check the array index");
-        return new ResponseEntity<>(exceptionDTO, HttpStatus.BAD_REQUEST);
-    }
     @ExceptionHandler(ProductNotFoundException.class)
     public ResponseEntity<ExceptionDTO> handleProductNotFoundException(ProductNotFoundException e) {
         ExceptionDTO exceptionDTO = new ExceptionDTO();

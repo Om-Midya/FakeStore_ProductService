@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
-public class ProductServiceImplementation implements ProductService {
+public class FakeStoreProductService implements ProductService {
 
     private final String url = "https://fakestoreapi.com/products";
     private final RestTemplate restTemplate = new RestTemplate();
@@ -122,25 +122,25 @@ public class ProductServiceImplementation implements ProductService {
     }
 
     @Override
-    public ProductFetchDTO addProduct(Product product) {
+    public Product addProduct(Product product) {
         ProductFetchDTO productFetchDTO = new ProductFetchDTO();
-        productFetchDTO.setId(product.getId());
         productFetchDTO.setTitle(product.getTitle());
         productFetchDTO.setDescription(product.getDescription());
         productFetchDTO.setPrice(product.getPrice());
         productFetchDTO.setCategory(product.getCategory().getName());
         productFetchDTO.setImage(product.getImageUrl());
 
-        restTemplate.postForObject(
+        ProductFetchDTO response = restTemplate.postForObject(
                 url,
                 productFetchDTO,
                 ProductFetchDTO.class
         );
-        return productFetchDTO;
+        assert response != null;
+        return convertToProduct(response);
     }
 
     @Override
-    public ProductFetchDTO updateProduct(Product product) {
+    public void updateProduct(Product product) {
         ProductFetchDTO productFetchDTO = new ProductFetchDTO();
         productFetchDTO.setId(product.getId());
         productFetchDTO.setTitle(product.getTitle());
@@ -153,6 +153,5 @@ public class ProductServiceImplementation implements ProductService {
                 url + "/" + product.getId(),
                 productFetchDTO
         );
-        return productFetchDTO;
     }
 }

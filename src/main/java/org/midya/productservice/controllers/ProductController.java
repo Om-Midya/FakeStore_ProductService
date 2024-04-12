@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("/products")
 public class ProductController {
 
-    private ProductService productService;
+    private final ProductService productService;
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
@@ -62,13 +62,13 @@ public class ProductController {
     }
 
     @PostMapping("/add")
-    public ProductFetchDTO addProduct(@RequestBody Product product){
+    public Product addProduct(@RequestBody Product product){
         return productService.addProduct(product);
     }
 
     @PutMapping("/update")
-    public ProductFetchDTO updateProduct(@RequestBody Product product){
-        return productService.updateProduct(product);
+    public void updateProduct(@RequestBody Product product){
+        productService.updateProduct(product);
     }
 
 }
