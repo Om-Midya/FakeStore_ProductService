@@ -116,9 +116,8 @@ public class FakeStoreProductService implements ProductService {
     }
 
     @Override
-    public String deleteProduct(Long id) {
+    public void deleteProduct(Long id) {
         restTemplate.delete(url + "/" + id);
-        return "Product with id " + id + " deleted successfully!";
     }
 
     @Override

@@ -13,7 +13,7 @@ public interface ProductService {
     public List<Product> getSortedProducts(String order);
     public List<Category> getAllCategories();
     public List<Product> getProductsByCategoryName(String categoryName);
-    public String deleteProduct(Long id);
+    public void deleteProduct(Long id);
     public Product addProduct(Product product);
     public void updateProduct(Product product);
 
